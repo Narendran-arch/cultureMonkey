@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "scripts": {
+    "dev": "node src/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.16.1",
+  "dependencies": {
+    "axios": "^1.13.5",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "h3": "^1.15.5",
+    "mysql2": "^3.16.3",
+    "pino": "^10.3.0",
+    "zod": "^4.3.6"
+  }
+}
