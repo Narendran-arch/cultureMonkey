@@ -6,11 +6,13 @@ import UserList from "./components/users/UserList";
 import CompanyForm from "./components/companies/CompanyForm";
 import UserForm from "./components/users/UserForm";
 import WelcomePage from "./pages/WelcomePage";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/companies" element={<CompanyList />} />

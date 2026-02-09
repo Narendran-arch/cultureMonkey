@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createUser } from "../../api/users.api";
 import Input from "../../components/Input";
+import toast from "react-hot-toast";
 
 export default function CreateUser({ companies = [], onCreated }) {
   const [form, setForm] = useState({
@@ -43,7 +44,7 @@ export default function CreateUser({ companies = [], onCreated }) {
       onCreated && onCreated();
     } catch (err) {
       console.error("Create user failed:", err);
-      alert(err?.message || "Failed to create user");
+       toast.error(err?.message || "Failed to create user");
     } finally {
       setLoading(false);
     }

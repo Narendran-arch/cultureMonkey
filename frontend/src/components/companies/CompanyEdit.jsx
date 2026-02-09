@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { updateCompany, getCompany } from "../../api/companies.api";
 import Input from "../../components/Input";
+import toast from "react-hot-toast";
 
 export default function CompanyEdit({
   company = {},
@@ -84,7 +85,7 @@ export default function CompanyEdit({
       onSaved && onSaved(latest ?? { id: company.id, ...payload });
     } catch (err) {
       console.error(err);
-      alert("Failed to save company");
+      toast.error("Failed to save company");
     } finally {
       setLoading(false);
     }
@@ -93,7 +94,6 @@ export default function CompanyEdit({
   return (
     <div className="w-full p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
       <form onSubmit={submit} className="space-y-4">
-
         <div>
           <Input
             name="name"
@@ -137,7 +137,6 @@ export default function CompanyEdit({
             </button>
           )}
         </div>
-
       </form>
     </div>
   );

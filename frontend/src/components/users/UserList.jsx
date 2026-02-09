@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { getUsers, deleteUser } from "../../api/users.api";
+import { getUsers, deleteUser, updateUser } from "../../api/users.api";
 import { getCompanies } from "../../api/companies.api";
 import Input from "../../components/Input";
 import CreateUser from "./CreateUser";
+import toast from "react-hot-toast";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -64,11 +65,7 @@ export default function UserList() {
 
     setSaving(true);
     try {
-      await fetch(`http://localhost:3000/users/${editing}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      await updateUser(editing, form);
       cancelEdit();
       load();
     } finally {
@@ -78,7 +75,7 @@ export default function UserList() {
 
   const handleDelete = async (id) => {
     if (editing !== id) {
-      alert("Click edit before deleting a user");
+       toast.error("Click edit before deleting a user");
       return;
     }
 

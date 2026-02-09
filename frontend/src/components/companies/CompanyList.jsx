@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getCompanies, deleteCompany } from "../../api/companies.api";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input";
+import toast from "react-hot-toast";
 
 export default function CompanyList() {
   const [companies, setCompanies] = useState([]);
@@ -54,7 +55,7 @@ export default function CompanyList() {
       await deleteCompany(id);
       await load();
     } catch {
-      alert("Cannot delete company with active users. Migrate users first.");
+       toast.error("Cannot delete company with active users. Migrate users first.");
     } finally {
       setDeletingId(null);
     }
