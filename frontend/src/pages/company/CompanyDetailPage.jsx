@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import MapView from "../../components/Mapview";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import { useNavigate } from "react-router-dom";
-import { Eye, Pencil, Repeat2 } from "lucide-react";
+import { Eye, Pencil, Repeat2, Trash } from "lucide-react";
 import MigrateUserModal from "../../components/user/MigrateUserModal";
 
 export default function CompanyDetail() {
@@ -260,7 +260,7 @@ export default function CompanyDetail() {
                   className="p-2 rounded-lg hover:bg-red-50 text-red-600"
                   title="Delete"
                 >
-                  🗑
+                  <Trash size={18}/>
                 </button>
               </div>
             </div>
