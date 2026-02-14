@@ -37,7 +37,23 @@ const getUserInCompanyOrThrow = async (company_id, user_id) => {
 
 export const getCompaniesHandler = async () => {
   try {
-    return await query("SELECT * FROM companies");
+    const sql = `
+      SELECT
+        c.id,
+        c.name,
+        c.address,
+        c.latitude,
+        c.longitude,
+        c.created_at,
+        COUNT(u.id) AS user_count
+      FROM companies c
+      LEFT JOIN users u
+        ON u.company_id = c.id
+      GROUP BY c.id
+      ORDER BY c.created_at DESC
+    `;
+
+    return await query(sql);
   } catch (err) {
     handleDbError(err);
   }

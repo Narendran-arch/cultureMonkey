@@ -6,6 +6,7 @@ import {
   getUserHandler,
   updateUserHandler,
   deactivateUserHandler,
+   activateUserHandler,
   deleteUserHandler,
   migrateUserHandler,
 } from "../handlers/users.handlers.js";
@@ -67,6 +68,12 @@ router.patch("/users/:id/migrate", async (event) => {
 router.delete("/users/:id", (event) => {
   const { id } = event.context.params;
   return deleteUserHandler(id);
+});
+
+// ACTIVATE USER
+router.patch("/users/:id/activation", (event) => {
+  const { id } = event.context.params;
+  return activateUserHandler(id);
 });
 
 export default router;

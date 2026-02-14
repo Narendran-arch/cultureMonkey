@@ -55,16 +55,45 @@ const handleDbError = (err) => {
 
 export const getUsersHandler = async () => {
   try {
-    return await query("SELECT * FROM users");
+    return await query(`
+      SELECT 
+        u.*,
+        c.name AS company_name
+      FROM users u
+      LEFT JOIN companies c ON u.company_id = c.id
+      ORDER BY u.created_at DESC
+    `);
   } catch (err) {
     handleDbError(err);
   }
 };
 
 export const getUserHandler = async (id) => {
-  return getUserOrThrow(id);
-};
+  try {
+    const rows = await query(
+      `
+      SELECT 
+        u.*,
+        c.name AS company_name
+      FROM users u
+      LEFT JOIN companies c ON u.company_id = c.id
+      WHERE u.id = ?
+    `,
+      [id],
+    );
 
+    if (!rows.length) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "User not found",
+      });
+    }
+
+    return rows[0];
+  } catch (err) {
+    handleDbError(err);
+  }
+};
 export const createUser = async ({
   first_name,
   last_name,
@@ -106,6 +135,7 @@ export const updateUserHandler = async (id, body) => {
     "email",
     "designation",
     "dob",
+    "company_id", 
   ];
 
   const updates = [];
@@ -113,6 +143,10 @@ export const updateUserHandler = async (id, body) => {
 
   for (const field of allowedFields) {
     if (body[field] !== undefined) {
+      if (field === "company_id") {
+        await assertCompanyExists(body[field]); // ✅ validate company
+      }
+
       updates.push(`${field} = ?`);
       values.push(body[field]);
     }
@@ -158,6 +192,16 @@ export const deleteUserHandler = async (id) => {
   }
 };
 
+export const activateUserHandler = async (id) => {
+  await getUserOrThrow(id);
+
+  try {
+    await query("UPDATE users SET is_active = TRUE WHERE id = ?", [id]);
+    return "User activated";
+  } catch (err) {
+    handleDbError(err);
+  }
+};
 /* ================= RELATIONS ================= */
 
 export const migrateUserHandler = async (id, company_id) => {

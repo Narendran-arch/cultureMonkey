@@ -1,84 +1,71 @@
-import { Link } from "react-router-dom";
-
+import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import heroImage from "../assets/hero-image.png";
+import { NavLink } from "react-router-dom";
 export default function WelcomePage() {
+   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-5xl mx-auto rounded-2xl bg-white shadow-lg border border-gray-100 overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8">
-          <div className="flex flex-col justify-center gap-6">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-              CultureMonkey — Manage teams & locations effortlessly
-            </h1>
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-              CultureMonkey helps you organize organizations, manage employees, and map
-              company locations. Create companies, add team members, migrate users,
-              and keep location data in sync — all with a clean, responsive UI.
-            </p>
+    <div className="min-h-screen bg-[#131E33] text-white overflow-hidden">
+      {/* Subtle grid / stars background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(64,224,208,0.08),transparent_40%),radial-gradient(circle_at_80%_60%,rgba(64,224,208,0.06),transparent_40%)]" />
 
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to="/companies"
-                className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow-sm transition"
-              >
-                View Companies
-              </Link>
+      {/* NAVBAR */}
+      <header className="relative z-10 flex items-center justify-between px-6 py-5 lg:px-16">
+        <div className="flex items-center gap-2 ">
+          <div className="w-9  h-9 rounded-lg bg-teal-500 flex items-center justify-center">
+            <span className="font-bold text-black">CM</span>
+          </div>
+          <span className="text-lg font-semibold">CultureMonkey</span>
+        </div>
+        <NavLink to={"/Dashboard"}>
+          <div className="hidden hover:cursor-pointer sm:inline-flex bg-teal-500 text-white px-5 py-2 rounded-full font-medium hover:bg-teal-400 transition">
+            Dashboard
+          </div>
+        </NavLink>
+      </header>
 
-              <Link
-                to="/users"
-                className="inline-flex items-center gap-2 border border-gray-200 hover:bg-gray-50 px-4 py-2 rounded-md text-gray-700 transition"
-              >
-                View Users
-              </Link>
-
-              <Link
-                to="/companies/new"
-                className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-800 px-4 py-2 rounded-md"
-              >
-                + Add Company
-              </Link>
-            </div>
-
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-              <div className="p-3 border rounded-lg bg-indigo-50">
-                <h4 className="font-medium text-gray-900">Quick onboarding</h4>
-                <p className="text-gray-600">Create companies and add users in seconds.</p>
-              </div>
-              <div className="p-3 border rounded-lg bg-green-50">
-                <h4 className="font-medium text-gray-900">Location sync</h4>
-                <p className="text-gray-600">Address → coordinates update workflow supported.</p>
-              </div>
-            </div>
+      {/* HERO */}
+      <section className="relative z-10 flex flex-col lg:flex-row items-center gap-16 px-6 pt-12 pb-20 lg:px-16 lg:pt-24">
+        {/* LEFT CONTENT */}
+        <div className="flex-1 max-w-xl">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm mb-6">
+            <span className="w-2 h-2 rounded-full bg-teal-400" />
+            ENTERPRISE ADMINISTRATION
           </div>
 
-          <div className="p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl flex flex-col justify-center">
-            <div className="w-full h-56 sm:h-64 rounded-lg border border-gray-100 overflow-hidden bg-white flex items-center justify-center">
-              <svg className="w-40 h-40 text-indigo-200" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7" />
-                <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M7 7V4a2 2 0 012-2h6a2 2 0 012 2v3" />
-              </svg>
-            </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+            Manage your <span className="text-teal-400">companies & team</span>{" "}
+            with clarity
+          </h1>
 
-            <ul className="mt-6 space-y-3 text-sm text-gray-600">
-              <li className="flex items-start gap-3">
-                <span className="text-indigo-600 font-semibold">•</span>
-                Real-time company & user management
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-indigo-600 font-semibold">•</span>
-                Inline editing, migration tools and safe deletes
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-indigo-600 font-semibold">•</span>
-                Mobile responsive, accessible UI
-              </li>
-            </ul>
+          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed">
+            One unified workspace to organize companies, assign users, and
+            maintain complete control over your organizational structure.
+          </p>
+
+          {/* CTA */}
+          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+           
+              <div  onClick={() => navigate("/dashboard")} className="inline-flex items-center justify-center gap-2 bg-teal-500 text-white px-6 py-3 rounded-xl font-medium hover:bg-teal-400 transition">
+                Go to Dashboard
+                <ArrowRight size={18} />
+              </div>
+           
+           
           </div>
         </div>
 
-        <div className="border-t border-gray-100 p-4 text-xs text-gray-500 text-center">
-          Built for team admins — quick overview and fast workflows.
+        {/* RIGHT VISUAL */}
+        <div className="flex-1 w-full max-w-xl">
+          <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-[#0B1228] to-[#050814] p-4 shadow-[0_0_60px_rgba(0,255,200,0.15)]">
+            <img
+              src={heroImage}
+              alt="Product workflow illustration"
+              className="w-full h-auto rounded-xl"
+            />
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
