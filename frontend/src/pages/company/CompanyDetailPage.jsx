@@ -104,6 +104,24 @@ export default function CompanyDetail() {
       toast.error("Failed to delete user");
     }
   };
+  // Validate coordinates
+  const isValidLatLng =
+    company.latitude &&
+    company.longitude &&
+    Number(company.latitude) !== 0 &&
+    Number(company.longitude) !== 0;
+
+  // Thailand fallback (Bangkok)
+  const FALLBACK_LOCATION = {
+    latitude: 13.7563,
+    longitude: 100.5018,
+  };
+
+  const mapLat = isValidLatLng ? company.latitude : FALLBACK_LOCATION.latitude;
+
+  const mapLng = isValidLatLng
+    ? company.longitude
+    : FALLBACK_LOCATION.longitude;
 
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 space-y-6">
@@ -179,11 +197,7 @@ export default function CompanyDetail() {
       <div className="bg-white rounded-2xl border p-4">
         <h2 className="font-medium mb-3">Location</h2>
         <div className="h-56 rounded-lg overflow-hidden border">
-          <MapView
-            address={company.address}
-            lat={company.latitude}
-            lng={company.longitude}
-          />
+          <MapView address={company.address} lat={mapLat} lng={mapLng} />
         </div>
       </div>
 

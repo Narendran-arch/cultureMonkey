@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import MigrateUserModal from "../../components/user/MigrateUserModal";
 import { getCompanies } from "../../api/companies.api";
+import { Eye, Trash , Pencil, Repeat2, ShieldMinus, ShieldPlus } from "lucide-react";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -290,7 +291,7 @@ export default function UsersPage() {
                       onClick={() => handleToggle(user)}
                       className="text-sm text-blue-600"
                     >
-                      {user.is_active ? "Deactivate" : "Activate"}
+                      {user.is_active ? <ShieldMinus /> : <ShieldPlus />}
                     </button>
 
                     <div className="flex gap-4">
@@ -298,14 +299,14 @@ export default function UsersPage() {
                         onClick={() => setMigrateUserData(user)}
                         className="text-sm text-gray-600"
                       >
-                        Migrate
+                        <Repeat2/>
                       </button>
 
                       <button
                         onClick={() => setDeleteId(user.id)}
                         className="text-sm text-red-500"
                       >
-                        Delete
+                        <Trash size={18} />
                       </button>
                     </div>
                   </div>

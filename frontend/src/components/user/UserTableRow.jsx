@@ -1,4 +1,4 @@
-import { Eye, Pencil, Trash } from "lucide-react";
+import { Eye, Pencil, Repeat2, ShieldMinus, ShieldPlus, Trash } from "lucide-react";
 import Badge from "../ui/Badge";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,7 @@ export default function UserTableRow({ user, onToggle, onDelete, onMigrate }) {
           onClick={() => onToggle(user)}
           className="text-xs sm:text-sm cursor-pointer text-blue-600"
         >
-          {user.is_active ? "Deactivate" : "Activate"}
+          {user.is_active ? <ShieldMinus /> : <ShieldPlus/> }
         </span>
 
         <Trash
@@ -46,7 +46,7 @@ export default function UserTableRow({ user, onToggle, onDelete, onMigrate }) {
           onClick={onMigrate}
           className="text-blue-600 hover:underline text-sm mr-3"
         >
-          Migrate
+          <Repeat2 />
         </button>
       </td>
     </tr>
